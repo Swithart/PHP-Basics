@@ -15,3 +15,4 @@ if (isset($_POST['username'])) {
         echo json_encode(['exists' => false]);
     }
 }
+?>

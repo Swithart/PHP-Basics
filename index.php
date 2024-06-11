@@ -3,10 +3,15 @@ require_once('classes/database.php');
 $con = new database();
 session_start();
 
+if (!isset($_SESSION['username']) || $_SESSION['account_type'] !=0) {
+    header('location:login.php');
+    exit();
+}
+
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
     if ($con->delete($id)){
-        header('location:index.php?status=success');
+        header('location:index.php?status=delete');
     } else {
         header('location:index.php');
     }
@@ -109,7 +114,9 @@ if (isset($_POST['delete'])) {
 
 <script src="package/dist/sweetalert2.js"></script>
 
-<!-- Pop Up Messages after a succesful transaction starts here --> <script>
+<!-- Pop Up Messages after a succesful transaction starts here --> 
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   const params = new URLSearchParams(window.location.search);
   const status = params.get('status');
@@ -117,9 +124,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (status) {
     let title, text, icon;
     switch (status) {
-      case 'success':
+      case 'delete':
         title = 'Success!';
         text = 'Record is successfully deleted.';
+        icon = 'success';
+        break;
+      case 'login':
+        title = 'Success!';
+        text = 'Successful login.';
+        icon = 'success';
+        break;
+      case 'update':
+        title = 'Success!';
+        text = 'Record is successfully updated.';
         icon = 'success';
         break;
       case 'error':
@@ -142,6 +159,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script> <!-- Pop Up Messages after a succesful transaction ends here -->
-
 </body>
 </html>

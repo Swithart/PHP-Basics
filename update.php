@@ -29,7 +29,7 @@ session_start();
   if ($con->updateUser($user_id, $firstname, $lastname, $birthday, $sex)) {
     echo "ditoaq";
     if ($con->updateUserAddress($user_id, $street, $barangay, $city, $province)) {
-      header('location:index.php?status=success');
+      header('location:index.php?status=update');
       exit();
     } else {
       $error = "Error occurred while updating user address. Please try again.";
@@ -139,40 +139,6 @@ session_start();
 <script src="./bootstrap-5.3.3-dist/js/bootstrap.js"></script>
 <!-- Bootsrap JS na nagpapagana ng danger alert natin -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const params = new URLSearchParams(window.location.search);
-  const status = params.get('status');
-
-  if (status) {
-    let title, text, icon;
-    switch (status) {
-      case 'success':   
-        title = 'Success!';
-        text = 'Record is successfully updated.';
-        icon = 'success';
-        break;
-      case 'error':
-        title = 'Error!';
-        text = 'Something went wrong.';
-        icon = 'error';
-        break;
-      default:
-        return;
-    }
-    Swal.fire({ 
-      title: title,
-      text: text,
-      icon: icon
-    }).then(() => {
-      // Remove the status parameter from the URL
-      const newUrl = window.location.origin + window.location.pathname;
-      window.history.replaceState(null, null, newUrl);
-    });
-  }
-});
-</script>
 
 </body>
 </html>

@@ -6,3 +6,4 @@
     $_SESSION['profilepicture'] =  '';
     session_unset();
     header('location:login.php');
+?>
