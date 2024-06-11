@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         break;
       case 'login':
         title = 'Success!';
-        text = 'Successful login.';
+        text = 'You are already successfully logged in.';
         icon = 'success';
         break;
       case 'update':
